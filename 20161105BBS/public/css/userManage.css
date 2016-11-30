@@ -1,0 +1,32 @@
+.userManage .table{
+    color: #000000;
+    border-color: #000000;
+    background-color: #ffffff;
+    padding: 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.usercount{
+    color: black;
+    margin-top: 10px;
+
+}
+.option{
+    width: 15%;
+}
+.username{
+    width: 20%;
+}
+.password{
+    width: 20%;
+}
+.registDate{
+    width: 25%;
+}
+.islogin{
+    width: 10%;
+}
+.role{
+    width: 10%;
+}

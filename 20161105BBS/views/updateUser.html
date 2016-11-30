@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css"/>
+    <style type="text/css">
+        .form{
+            width: 400px;
+            min-height: 200px;
+            background-color: white;
+            margin:200px auto;
+            border-radius: 10px;
+            padding: 20px 40px;
+            box-sizing: border-box;
+        }
+        .form h1{
+            color: dodgerblue;
+            font-size: 30px;
+        }
+        .form-inner p{
+            border-radius: 5px;
+            margin-top: 10px;
+            position: relative;
+        }
+        .form-inner p:not(:last-child){
+            border: 1px solid #CCCCCC;
+        }
+        .form-inner input{
+            width: 100%;
+            border: none;
+            padding: 5px 10px;
+            box-sizing: border-box;
+            margin: 5px 0;
+            outline: none;
+        }
+        input ,textarea{
+            background-color: #ffffff;
+        }
+        .form-inner input[type="submit"]{
+            background-color: dodgerblue;
+            font-size: 20px;
+            color: white;
+            line-height: 30px;cursor: pointer;
+        }
+        .form-inner input[type="file"]{
+            cursor: pointer;
+            width: 100%;
+            color: gray;
+            font-size:14px;
+            opacity: 0;
+            line-height: 30px;
+            cursor: pointer;
+        }
+        #tips{
+            display: none;
+            color: #ffffff;
+            font-size: 16px;
+            margin-left: 20px;
+            padding: 3px 10px;
+            background-color: red;
+        }
+        #fileTips{
+            position: absolute;color:gray;
+            font-size: 14px;
+            left: 10px;top: 15px;
+        }
+    </style>
+    <script src="/js/jquery-1.7.2.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/jquery.form.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(function(){
+            //需要登录
+            $.get("http://192.168.123.1:8888/web/islogin", function (result) {
+                console.log(result)
+                if(result=="-1"){
+                    alert("你还没有登录，即将跳到登录页面")
+                    location.href="http://192.168.123.1:8888/login.html"
+                }else{
+                    var username =sessionStorage.getItem("loginer");
+                    $("#username").val(username)
+                    $("#form").submit(function(){
+                        $(this).ajaxSubmit({
+                            type:'POST',
+                            url:"http://192.168.123.1:8888/user/updateUser",
+                            success:function(result){
+                                console.log(result)
+                                if(result=="1"){
+                                    //上传成功，跳转到首页
+                                    alert("修改成功，准备跳转到首页")
+                                    location.href="http://192.168.123.1:8888/homePage.html"
+                                }else if(result=="-1"){
+                                    //上传失败
+                                    alert("修改失败");
+                                    location.reload()
+                                }else if(result=="psderror"){
+                                    $("#tips").show()
+                                    $("#tips").html("原密码不正确")
+                                }
+                            }
+                        })
+
+                    })
+                    $("input").focus(function () {
+                        $("#tips").hide()
+                    })
+                }
+            })
+
+        })
+    </script>
+</head>
+<body>
+
+<div class="form">
+    <h1>更改个人资料<span id="tips"></span></h1>
+    <div class="form-inner">
+        <form  id="form" action="javascript:;">
+            <p><input type="text" placeholder="请更改用户名" name="username" id="username"/></p>
+            <p><input type="password" placeholder="请填写原密码" name="oldPassword"/></p>
+            <p><input type="password" placeholder="请填写新密码密码" name="newPassword"/></p>
+            <p><input type="file" name="avatar" value="选择图片"/> <span id="fileTips">请选择头像</span></p>
+            <p><input type="submit"  id="submit" value="确认提交" /></p>
+        </form>
+    </div>
+</div>
+</body>
+</html>

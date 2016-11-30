@@ -1,0 +1,116 @@
+.talk_detail{
+	min-height:300px ;
+	width: 100%;
+}
+.talk_detail .talk_info .info_avatar{
+	height: 120px;
+	width: 120px;
+	margin: auto;
+	float: none;
+}
+.talk_detail .talk_info  .info_text {
+	float: none;
+	margin: 20px auto;
+	text-align: center;
+}
+.talk_detail .talk_info{
+	float: left;
+	width: 15%;
+	height: 100%;
+	padding: 20px 10px;
+}
+
+.talk_detail .talk_content{
+	float: right;
+	width: 85%;
+	background-color: white;
+	height: 100%;
+	padding: 20px 30px;
+}
+.talk_detail .talk_content .title{
+	font-size: 30px;
+	border-bottom: 2px solid dodgerblue;
+}
+.talk_detail .talk_content .content{
+	margin: 20px 0;
+	height: auto;
+}
+/*评论*/
+.comment-list{
+	margin-top: 10px;
+}
+.comment-list h1{
+	color: #000000;
+}
+.comment{
+	min-height: 100px;
+	background-color: white;
+	padding: 10px 10px;
+	margin-bottom: 10px;
+	width: 100%;
+	display: table;
+	position: relative;
+}
+.comment-list-inner{
+	position: relative;
+	background-color: #f8f8f8;
+}
+.comment>div>div{
+	float: left;
+	height: 100%;
+}
+.comment .info_avatar{
+	height: 80px;
+	width: 80px;
+}
+.comment .info_text{
+	color: black;
+	width: 50px;
+	word-break:break-all;
+}
+.comment-author{
+	width: 15%;
+	/*border-right: 1px solid dodgerblue;*/
+	background-color: #81c2d6
+}
+.commentDate{
+	color: gray;
+	font-size: 14px;
+	text-align: right;
+	bottom: 0px;right: 20px;
+	position: absolute;
+}
+
+.comment-content{
+	position: relative;
+	width: 85%;
+	height: 100%;
+	padding: 10px 20px;
+	color: black;
+	font-size: 16px;
+}
+.setComment{
+	margin-top: 10px;
+	border: 4px solid dodgerblue;
+	background-color: #ffffff;
+	color: #000000;
+	padding: 20px;display: none;
+}
+.setComment textarea{
+	width: 100%;
+	resize: none;
+	height: 100px;
+	padding: 20px;
+}
+.setComment input[type="button"]{
+	background-color: #269abc;
+	color: #ffffff;
+	font-size: 16px;padding: 5px 10px;
+	border: none;border-radius: 5px;
+	float: right;outline: none;
+}
+.tips{
+	color: #000000;
+	font-size: 20px;
+	margin-top: 5px;
+}

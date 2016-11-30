@@ -1,0 +1,464 @@
+.container{
+	width: 1050px;
+	margin: 0 auto;
+}
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: " ";
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix{
+    *zoom: 1;
+}
+
+
+.webblog_top .container{
+	width: 1200px;
+}
+.webblog_top{
+	background-color:white;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 2;
+	padding: 0 40px;
+	border-top: 5px solid #8192d6;
+	color: #000000;
+}
+.webblog_top .user a{
+	margin: 0 5px;
+}
+.webblog{
+	padding-top: 80px;
+}
+.webblog_main{
+	padding-top: 10px;
+	min-height: 500px;
+}
+.webblog_footer{
+	background-color: #dcf7a1;
+	height: 150px;
+}
+.talk{
+	height: 150px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	background-color: white;
+	box-shadow: 0 0 10px #81c2d6;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+.talk_info{
+	background-color: #81c2d6;
+	height: 60px;
+	padding: 5px;
+	box-sizing: border-box;
+	padding-left: 20px;
+	position: relative;
+}
+.talk_content{
+	padding: 10px 20px;
+}
+.text-box{
+	height: 200px;
+	width: 100%;
+	background-color: #8192d6;
+	border-radius: 10px;
+	color: black;
+	margin-bottom: 15px;
+}
+.info_avatar {
+	width: 50px;
+	height: 50px;
+	float: left;
+	margin-right: 15px;
+	overflow: hidden;border-radius: 100%;
+}
+.info_text{
+	color: white;
+	float: left;
+}
+.info_text .author{
+	font-size: 18px;
+	margin-bottom: 5px;
+}
+.talk_content .title{
+	color: black;
+	font-size: 18px;
+	
+}
+.talk_content .content{
+	color: gray;
+	height: 38px;
+	overflow: hidden;
+	word-break: break-all;
+
+}
+.webName{
+	float: left;
+	font-size: 30px;
+	font-weight: bold;
+	color: #57d2f7;
+	letter-spacing: 5px;font-style: italic;
+	margin-right: 20px;
+	margin-top: 5px;
+}
+
+.search{
+	float: left;
+	margin: 10px 0;
+	border: 1px solid cornflowerblue;
+	padding: 0 10px;
+}
+.search input{
+	width: 425px;
+	padding: 5px 0px 5px 5px ;
+	height: 20px;
+	margin: 7px 0;
+	border: none;
+	outline: none;
+}
+.nav{
+	float: right;
+	margin-top: 15px;
+	margin-right: 80px;
+}
+.nav>div{
+	margin-left: 26px;
+	font-size: 18px;
+	color: black;
+}
+.homepage{
+	float: left;
+}
+.login{
+	float: right;
+}
+.login a{
+	margin: 0 5px;
+}
+.user{
+	float: right;
+}
+.post{
+	display: none;
+}
+
+/*分页*/
+.pageCount{
+	margin-top: 20px;
+	margin-bottom: 30px;
+	border: 2px solid #ffffff;
+	border-right: none;
+	display: table;
+}
+.pageCount ul li{
+	float: left;
+	height: 30px ;line-height: 30px;
+	width: 30px;
+	cursor: pointer;
+	border-right: 2px solid #ffffff;
+	background-color: #245269;color: #ffffff;text-align: center;
+}
+.welcome-tips{
+	text-align: center;
+	font-size: 18px;color: #ffffff;display: none;
+}
+/*因为我直接给删除加样式的话，因为浮动的问题，加样式的时候，删除按钮还没有生成*/
+/*我只能给一开始生成的加上样式，用于改变删除按钮的样式*/
+.post-wrap.del .delPost{
+	right: 20px;visibility: visible;opacity: 1;
+}
+.delPost{
+	min-width: 50px;
+	padding: 5px 0;color: darkred;
+	position: absolute;right: 0px;top: 15px;
+	cursor: pointer;transition: 0.5s;
+	visibility: hidden;opacity:0;
+}
+
+input ,textarea{
+	background-color: #ffffff;
+	border: 1px solid dodgerblue;
+	margin-bottom: 5px;
+}
+
+/*提示框*/
+.user{
+	position: relative;
+}
+.commentPrompt{
+	position: absolute;
+	padding: 15px;
+	height: 85px;
+	width: 200px;
+	background-color: rgba(0,0,0,0.7);
+	border-radius: 10px;
+	top: 50px;
+	color: #ffffff;
+	right: 0;
+	display: none;
+}
+.comment-inner{
+	height: 100%;
+	text-align: center;
+}
+.newCount{
+	height: 30px;
+	width: 30px;
+	background-color: red;
+	color: #ffffff;
+	-webkit-border-radius: 100%;
+	-moz-border-radius: 100%;
+	border-radius: 100%;
+	position: absolute;top:0px;text-align: center;
+	right:20px;
+	line-height: 30px;cursor: pointer;
+}
+.newCount:hover{
+	color: #ffffff;text-decoration: none;
+}
+.iknow{
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+}
+.iknow>button{
+	color: firebrick;
+	background-color: transparent;
+	border: none;
+
+}
+.commentPrompt:after{
+	content: '';
+	position: absolute;
+	top: 0px;
+	left: 50%;
+	-webkit-transform: translateX(-50%) translateY(-100%);
+	-moz-transform: translateX(-50%)  translateY(-100%);
+	-ms-transform: translateX(-50%)  translateY(-100%);
+	-o-transform: translateX(-50%)  translateY(-100%);
+	transform: translateX(-50%)  translateY(-100%);
+	border: 20px solid transparent;
+	border-bottom-color:rgba(0,0,0,0.7) ;
+}
+#commentCount{
+	quotes: "("")";
+}
+#commentCount:before{
+	content: open-quote;
+}
+#commentCount:after{
+	content: close-quote;
+}
+/*新评论
+ */
+.shadeBg{
+	position: fixed;
+	background-color: rgba(0,0,0,0.5);
+	top: 0;left: 0;right: 0;bottom: 0;
+	display: none;
+}
+.showNewComment{
+	padding: 30px 30px;
+	height: 500px;
+	width: 400px;
+	background-color: rgba(0,0,0,0.5);
+	position: fixed;
+	/*top:50% ;*/
+	top: -200%;
+	left: 50%;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%)translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+	-o-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+	box-shadow: 0 0 10px dodgerblue;
+	transition: 1s ease-out;
+	border-radius: 10px;
+	overflow: hidden;
+}
+.showNewComment-inner{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.showNewComment-content{
+	width: 100%;
+	padding: 10px 20px;
+	
+}
+.showNewComment #closeShow{
+	position: fixed;
+	right: 5px;
+	color: red;
+	top: 5px;
+	font-size: 20px;
+	background: url(../img/icon/close.png) no-repeat ;
+	background-size: contain;
+	height: 30px;
+	width: 30px;
+	z-index: 2;
+}
+.showNewComment.on{
+	top:50% ;
+}
+.newComment-wrap{
+	background-color: white;
+	margin-bottom: 10px;
+}
+.newComment-part{
+	padding: 5px 5px;
+	padding-bottom: 0;
+}
+.newComment-info>div{
+	float: left;
+}
+.newComment-wrap p{
+	margin: 0;
+}
+.newComment-info p:last-child{
+	color: grey;
+	font-size: 12px;
+}
+.newCommentAvatar{
+	height: 40px;
+	width: 40px;
+	overflow: hidden;
+	border-radius: 100%;
+	margin-right: 5px;
+}
+.newComment-content{
+	margin: 5px 0;
+	position: relative;
+}
+.newComment-content>p{
+	width: 220px;
+}
+.newComment-opt{
+	position: absolute;
+	right: 5px;
+	top:3px;font-size: 12px;
+}
+.newComment-opt>a{
+	margin-right: 3px;
+}
+.post-part{
+	height: 50px;
+	background-color: lightblue;
+	overflow: hidden;
+}
+.post-part>div{
+	float: left;
+	height: 100%;
+
+}
+.postAuthorName{
+	line-height: 50px;
+	margin-left: 10px;
+	max-width: 80px;
+	overflow: hidden;
+	white-space : nowrap ;
+	text-overflow: ellipsis;
+}
+.postAvatar{
+	width: 50px;
+	overflow: hidden;
+
+}
+.posttitle{
+	line-height: 50px;
+	margin-left: 5px;
+	width: 150px;
+	white-space : nowrap ;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.roller{
+	background-color: deepskyblue;
+	border-radius: 10px;
+}
+.orbital{
+	width: 10px;
+}
+/*回复评论框*/
+.commentforPrompt{
+	position: fixed;
+	bottom:-200px;left: 0;
+	background-color: lightblue;
+	width: 100%;
+	padding: 15px;
+	transition: 1s;
+	box-shadow: 0 0 10px darkgrey;
+	z-index: 3;
+}
+.commentforPrompt.show{
+	bottom: 0;
+}
+.commentforPrompt>div{
+	display: table;
+	width: 80%;
+	margin: auto;
+}
+.nestComment{
+	margin-top: 5px;
+	font-size: 16px;
+	padding: 8px 10px;
+	border-bottom: 1px solid cornflowerblue;
+	position: relative;
+}
+.nestComment>div{
+	float: left;
+}
+.nestComment .comment-opt{
+	top: 10px;
+}
+.authorname{
+	color: limegreen;
+}
+/*评论的按钮*/
+.comment-opt{
+	position: absolute;right: 20px;
+	top: 20px;
+	font-size: 14px;
+	display: none;
+}
+.comment-opt>a{
+	float: left;
+	margin-right: 5px;
+}
+.commentfor{
+	color: blue;
+}
+.canComment .comment-opt{
+	display: block;
+}
+
+/*评论的内容*/
+.nestcommentContent{
+	width: 520px;
+	text-align: left;
+}
+.lastComment{
+	background-color: white;
+	height: 30px;
+	line-height:30px;
+}
+.lastComment>div{
+	float: left;
+}
+.lastAuthor>span:first-child,.lastAuthor>span:nth-child(3){
+	color: dodgerblue;
+	margin: 0 3px;
+}
+.lastComment .lastContent{
+	padding-left: 5px;
+	width: 90px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}

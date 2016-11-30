@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>个人主页</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/person.css"/>
+    <script src="/js/jquery-1.7.2.js"></script>
+	<script src="/js/CustomRoller.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/post.js"></script>
+    
+    <script type="text/javascript">
+		$(function () {
+			//判断是否登录
+			islogin(function (result, result2) {
+				if(result==1){
+					//已经登录
+					$(".setPersonData").show()//设置个人资料
+					//console.log(result2)
+				}else{
+					//没有登录
+					$(".setPersonData").hide()
+				}
+			})
+			//跳转到这个页面，我要根据url上的参数去取相应的数据
+			//如果name的值为空，则不让你跳转到这个页面
+			var  author=decodeURIComponent(location.search.slice(6));
+			var  login=parseInt(sessionStorage.getItem("login"));
+			var  loginer=sessionStorage.getItem("loginer")
+
+			//console.log( typeof  login)
+			//console.log(login)
+			//没有参数，而且没有登录是不能进来的
+			if(!author&&!login){
+				//为空
+				alert("你还没有登录，即将跳到登录页面");
+				location.href="http://192.168.123.1:8888/login.html";
+			}else if(author){
+				//console.log(loginer,author)
+				$("#myComment").hide()
+				if(author==loginer){
+					//alert(author)
+					$(".post-wrap").addClass("del")
+					$("#myComment").show()
+				}
+				var  url1="http://192.168.123.1:8888/post/getAllPostCount?name="+author+"&page=";
+				var  url2="http://192.168.123.1:8888/post/getPersonPost?name="+author+"&page=";
+				//没有登录，可以访问空间
+				//获取用户
+				//获取相应的用户发的帖子总数
+				getPostCount(url1,function (page,count) {
+					var pageSize=parseInt(page)+1;
+					for(var i=1;i<pageSize;i++){
+						var page=$("<li></li>").html(i);
+						$(".pageCount ul").append(page)
+					}
+					$(".text-box span").html(count)
+				})
+				//获取相应的用户及他发的帖子
+				getUser(author, function (result) {
+					//console.log(result)
+					$(".person_avatar img").attr("src",result.avatar);
+					$(".person_name").html(result.username)
+					//获取用户所有帖子
+					getpost(url2,1)
+				})
+
+			}else if(login){
+				//已经登录,跳转到自己的个人主页
+				//只是进的是自己的主页才能显示删除
+				$(".post-wrap").addClass("del")
+				$("#myComment").show()
+				var  username=sessionStorage.getItem("loginer");
+				var  avatar=sessionStorage.getItem("loginAvatar");
+				var  url1="http://192.168.123.1:8888/post/getAllPostCount?name="+username+"&page=";
+				var  url2="http://192.168.123.1:8888/post/getPersonPost?name="+username+"&page=";
+				$(".person_name").html(username);
+				$(".person_avatar img").attr("src",avatar);
+				//获取用户帖子总数
+				getPostCount(url1,function (page,count) {
+					var pageSize=parseInt(page)+1;
+					for(var i=1;i<pageSize;i++){
+						var page=$("<li></li>").html(i);
+						$(".pageCount ul").append(page)
+						//console.log(count)
+						$(".text-box span").html(count)
+					}
+				})
+
+				//获取用户所有帖子
+				getpost(url2,1)
+			}
+			//点击获取相应的页数帖子
+			$(".pageCount ul").on("click","li", function (e) {
+				var  page=$(this).html();
+				getpost(url2,page)
+			})
+		})
+
+    </script>
+    
+</head>
+<body>
+	
+	<!--最外层-->
+	<div class="webblog person">
+		<!--顶部菜单-->
+		<header class="webblog_top ">
+			<div class="container">
+
+				<div class="webName">
+					弦论坛
+				</div>
+				<div class="search">
+					<input type="text" name="" id="" value="" />
+					<a href="" class="icon icon-fangda"></a>
+				</div>
+				<div class="nav">
+					<div class="user" style="display: none;">
+						<span>
+							<a href="" id="personPage">
+								<i class="icon icon-person"></i>
+								<span id="username"></span>
+							</a>
+							<div class="commentPrompt">
+								<div class="comment-inner"></div>
+								<a class="newCount">21</a>
+								<div class="iknow">
+									<button href="javascript:;" >详情</button>
+									<button href="javascript:;" >取消</button>
+								</div>
+							</div>
+
+							
+							<a href="http://192.168.123.1:8888/user/logout" class="logout"> 退出</a>
+						</span>
+					</div>
+					<div class="setPersonData">
+						<a href="http://192.168.123.1:8888/updateUser.html" target="_blank">
+
+							<i class="icon icon-setData"></i>
+							设置个人资料
+						</a>
+					</div>
+
+					<div class="login">
+						<a href="http://192.168.123.1:8888/login.html">登录</a>
+						<a href="http://192.168.123.1:8888/regist.html">注册</a>
+					</div>
+					<div class="homepage">
+						<a href="http://192.168.123.1:8888/homepage.html">
+							<i class="icon icon-home"></i> 首页
+						</a>
+					</div>
+				</div>
+
+			</div>
+			<div class="shadeBg">
+				
+			</div>
+			<div class="showNewComment">
+				<a href="javascript:;" id="closeShow"></a>
+				<div class="showNewComment-inner">
+					<div class="showNewComment-content comment-list">
+
+					</div>
+				</div>
+			</div>
+
+
+		</header>
+		<!--中间内容-->
+		<div class="webblog_main">
+			<div class="container">
+				<div class="personPage_user">
+					<div class="">
+						<p class="person_avatar"><img src=""/></p>
+						<p class="person_name"></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<div class="text-box">
+							共 <span></span> 个帖子
+						</div>
+						<div class="text-box" id="myComment">
+							<a href="http://192.168.123.1:8888/userComment.html">查看帖子评论</a>
+						</div>
+					</div>
+					<div class="col-md-9">
+						<div class="post-wrap">
+
+						</div>
+
+						<div class="pageCount clearfix">
+							<ul></ul>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
+		</div>
+
+
+	</div>
+
+
+	
+</body>
+</html>

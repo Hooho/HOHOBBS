@@ -1,0 +1,41 @@
+.comment-wrap{
+	background-color: white;
+	padding: 10px;
+	color: black;
+	margin-bottom: 15px;
+	box-shadow: 0 0 10px cornflowerblue;
+}
+.userComment .webblog_main .container{
+	width: 800px;
+}
+.comment-inner{
+	min-height: 100px;
+}
+.commentIncomment .nestComment{
+	font-size: 14px;
+}
+.post_Comment{
+	display: block;
+	background-color: lightskyblue;
+	height: 60px;
+	line-height: 60px;
+}
+.post_Comment>span{
+	float: left;
+	height: 100%;
+	margin-right: 5px;
+}
+.postNewcomment{
+	color: black;
+	text-align: left;
+	margin-top: 5px;
+	position: relative;
+}
+.commenter,.author{
+	color: darkblue;
+}
+.userAvatar{
+	height: 60px;
+	width: 60px;
+	overflow: hidden;
+}

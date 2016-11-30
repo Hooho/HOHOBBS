@@ -1,0 +1,82 @@
+
+        postservice.getAllPost({authorId:req.session.userID}, function (posts) {
+            //用户没有帖子
+            if(!posts.length){
+                var data={
+                    username:req.session.username,
+                    avatar:req.session.avatar,
+                    role:req.session.role,
+                    newComment:hasCommentPost,
+                    newcommentCount:newcommentCount
+                }
+                res.send(data);
+                return ;
+            }
+            iterator1(0)
+            //第一个迭代器为了给帖子增加评论
+            function iterator1(index1){
+                if(index1==posts.length){
+                    //发送
+                    var data={
+                        username:req.session.username,
+                        avatar:req.session.avatar,
+                        role:req.session.role,
+                        newComment:hasCommentPost,
+                        newcommentCount:newcommentCount
+                    }
+                    //console.log("有新评论的帖子",hasCommentPost)
+                    //发送用户信息
+                    res.json(data);
+                    return ;
+                }
+
+                var post=posts[index1]._doc;
+                var postid=post._id;
+               //console.log(222222,post.hasnewComment)
+                //当新评论不为0的帖子
+                if(post.hasnewComment){
+                    //总新评论数
+                    newcommentCount+=parseInt(post.hasnewComment);
+                    //我把文章所有的评论都加载出来了，考虑不周全
+                    commentservice.findComment({postId:postid}, function (comments) {
+
+                        iterator2(0)
+                        var newComment=[];
+                        //第二个迭代器为了给评论增加信息
+                        function iterator2(index2){
+                            if(index2==comments.length){
+                                //把评论添加进贴子
+                                post.comments=newComment;
+                                hasCommentPost.push(post)
+                                iterator1(index1+1)
+                                return ;
+                            }
+
+                            var  comment=comments[index2]._doc
+                            //如果是新评论才加载进来
+                            console.log(comment.newCom)
+                            if(comment.newCom=="1"){
+                                // console.log(comment,777777777)
+                                var  authorId=comment.authorId;
+                                //console.log(authorId,888888)
+                                userservice.findOneUser({_id:authorId}, function (user) {
+                                    //console.log(user,9999)
+                                    comment.author=user.username;
+                                    newComment.push(comment)
+                                    iterator2(index2+1);
+                                })
+                            }else{
+                                iterator2(index2+1);
+                            }
+
+                        }
+
+                    })
+                }else{
+                    iterator1(index1+1)
+                }
+            }
+
+            //console.log("数目",newcommentCount)
+
+        })

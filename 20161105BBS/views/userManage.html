@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/css/icon.css" />
+    <link rel="stylesheet" type="text/css" href="/css/userManage.css" />
+    <script src="/js/jquery-1.7.2.js"></script>
+    <script src="/js/post.js"></script>
+    <script>
+        $(function () {
+            //判断是否登录
+            islogin(function (result,result2) {
+                var role=sessionStorage.getItem("loginRole")
+                if(role!="2"){
+                    alert("对不起，你不是管理员")
+                    location.href="http://192.168.123.1:8888/homePage.html"
+                }else{
+
+                    $.get("http://192.168.123.1:8888/user/getAllUser?page=1", function (result) {
+                        showUser(result)
+                        console.log(result)
+                    })
+
+                }
+            })
+            //点击页数获取用户
+            $(".pageCount ul").on("click","li", function (e) {
+                var  url="http://192.168.123.1:8888/user/getAllUser?page="
+                var  page=$(this).html();
+                $.get(url+page, function (result) {
+                    showUser(result)
+                })
+            })
+
+            //列出所有用户
+            function showUser(result){
+                //console.log(result)
+                $(".pageCount ul").empty()
+                var page=Math.ceil(result.count/8);
+                for(var i=1;i<page+1;i++){
+                    var li=$("<li></li>").html(i);
+                    $(".pageCount ul").append(li)
+                }
+                $(".table tbody").empty();
+                $(".usercount span").html(result.count)
+
+                result.user.forEach(function (item,index) {
+                    var date=FormatDate(item.registDate),role="",islogin="";
+                    if(item.role=="1"){
+                        role="会员"
+                    }else if(item.role=="2"){
+                        role="管理员";
+                    }
+                    console.log(parseInt(item.islogin))
+                    if(!item.islogin){
+                        islogin="离线"
+                    }else{
+                        islogin="在线"
+                    }
+
+                    var tr=[
+                        '<tr>',
+                        '<td>',item.username,'</td>',
+                        ' <td>',item.password,'</td>',
+                        ' <td>',role,'</td>',
+                        '<td>',date,'</td>',
+                        '<td>',islogin,'</td>',
+                        '<td><a class="delUser" href="javascript:;" userid="',item._id ,'">删除</a></td>',
+                        '</tr>'
+                    ].join("");
+                    $(".table tbody").append($(tr))
+
+                })
+
+            }
+            //删除用户
+            $(".table").on("click",".delUser", function () {
+                var  userid=$(this).attr("userid");
+                var  url="http://192.168.123.1:8888/user/delUser?userid=";
+                $.get(url+userid, function (result) {
+                    console.log(result);
+                    if(result.n==1){
+                        alert("删除用户成功")
+                        location.reload();
+                    }
+                })
+            })
+
+        })
+    </script>
+</head>
+<body>
+    <!--最外层-->
+    <div class="webblog userManage">
+        <!--顶部菜单-->
+        <header class="webblog_top ">
+        <div class="container">
+
+            <div class="webName">
+                弦论坛
+            </div>
+            <div class="search">
+                <input type="text" name="" id="" value="" />
+                <a href="" class="icon icon-fangda"></a>
+            </div>
+            <div class="nav">
+                <div class="user" style="display: none;">
+                    <span>
+                        <a href="" id="personPage">
+                            <i class="icon icon-person"></i>
+                            <span id="username"></span>
+                        </a>
+                        <a href="http://192.168.123.1:8888/user/logout" class="logout">退出</a>
+                    </span>
+                </div>
+                <div class="login">
+                    <a href="http://192.168.123.1:8888/login.html">登录</a>
+                    <a href="http://192.168.123.1:8888/regist.html">注册</a>
+                </div>
+                <div class="homepage">
+                    <a href="http://192.168.123.1:8888/homepage.html">
+                        <i class="icon icon-home"></i> 首页
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="shadeBg">
+				
+			</div>
+            <div class="showNewComment">
+                <a href="javascript:;" id="closeShow"></a>
+                <div class="showNewComment-inner">
+                    <div class="showNewComment-content comment-list">
+
+                    </div>
+                </div>
+            </div>
+			
+			
+    </header>
+        <div class="container">
+            <h3 class="usercount">共有 <span></span> 个用户已注册</h3>
+            <table class="table table-striped ">
+                <thead>
+                    <tr>
+                        <th class="username">用户名</th>
+                        <th class="password">密码</th>
+                        <th class="role">角色</th>
+                        <th class="registDate">注册日期</th>
+                        <th class="islogin">状态</th>
+                        <th class="option">操作</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <div class="pageCount clearfix">
+                <ul>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

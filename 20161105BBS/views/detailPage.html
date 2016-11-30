@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title>详情页</title>
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="/css/common.css" />
+		<link rel="stylesheet" type="text/css" href="/css/icon.css" />
+		<link rel="stylesheet" type="text/css" href="/css/person.css" />
+		<link rel="stylesheet" type="text/css" href="/css/detail.css" />
+		<script src="/js/jquery-1.7.2.js"></script>
+		<script src="/js/CustomRoller.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/post.js"></script>
+		<script src="/js/detailPost.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+
+		<!--最外层-->
+		<div class="webblog">
+			<!--顶部菜单-->
+			<header class="webblog_top ">
+				<div class="container">
+
+					<div class="webName">
+						小美论坛
+					</div>
+					<div class="search">
+						<input type="text" name="" id="" value="" />
+						<a href="" class="icon icon-fangda"></a>
+					</div>
+					<div class="nav">
+						<div class="user" style="display: none;">
+							<span>
+								<a href="" id="personPage">
+									<i class="icon icon-person"></i>
+									<span id="username"></span>
+							</a>
+							<div class="commentPrompt">
+								<div class="comment-inner">
+
+								</div>
+								<a class="newCount">21</a>
+								<div class="iknow">
+									<button href="javascript:;">详情</button>
+									<button href="javascript:;">取消</button>
+								</div>
+							</div>
+
+							<a href="/user/logout" class="logout">退出</a>
+							</span>
+						</div>
+						<div class="login">
+							<a href="http://192.168.123.1:8888/login.html">登录</a>
+							<a href="http://192.168.123.1:8888/regist.html">注册</a>
+						</div>
+						<div class="homepage">
+							<a href="http://192.168.123.1:8888/homepage.html">
+								<i class="icon icon-home"></i> 首页
+							</a>
+						</div>
+					</div>
+
+				</div>
+				<div class="shadeBg">
+
+				</div>
+				<div class="showNewComment">
+					<a href="javascript:;" id="closeShow"></a>
+					<div class="showNewComment-inner">
+						<div class="showNewComment-content comment-list">
+
+						</div>
+					</div>
+				</div>
+
+
+
+			</header>
+
+			<!--中间内容-->
+			<div class="webblog_main">
+				<div class="container">
+
+					<article class="talk_detail clearfix">
+
+						<div class="talk_info">
+							<div class="info_avatar">
+								<a href=""><img src="" /></a>
+							</div>
+							<div class="info_text">
+								<p class="author"></p>
+							</div>
+						</div>
+
+						<div class="talk_content">
+							<div class="title">
+								<p>
+
+								</p>
+							</div>
+							<div class="content">
+								<p></p>
+							</div>
+						</div>
+					</article>
+					<div class="tips">
+						<p>登录了可以发评论哟
+							<a href="http://192.168.123.1:8888/login.html">登录</a>
+						</p>
+					</div>
+					<div class="setComment clearfix">
+						<form id="form">
+							<textarea name="comment" placeholder="你不想评论两句？" id="commentConet"></textarea>
+							<input type="button" id="commentBtn" value="发表评论" />
+						</form>
+					</div>
+					<div class="comment-list">
+						<h1>
+							<span>精彩评论</span>
+							<span style="font-size: 16px;" id="commentCount">
+								当前一共有
+								<span ></span>
+								条评论
+							</span>
+						</h1>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+		</div>
+
+		<div class="commentforPrompt">
+			<div class="form-group  input-group-lg ">
+				<div class="col-md-10">
+					<input type="text" name="commentforlast" class="form-control input-lg" id="commentforlast" value="" />
+				</div>
+				<div class="col-md-2">
+					<input type="button" value="提交" class="btn btn-success btn-lg" id="submitComment" />
+					<input type="button" value="取消" class="btn btn-default btn-lg" id="cancelComment" />
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>

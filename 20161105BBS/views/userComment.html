@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title>评论页</title>
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="/css/common.css" />
+		<link rel="stylesheet" type="text/css" href="/css/icon.css" />
+		<link rel="stylesheet" type="text/css" href="/css/person.css" />
+		<link rel="stylesheet" type="text/css" href="/css/detail.css" />
+		<link rel="stylesheet" type="text/css" href="/css/comment.css" />
+		<script src="/js/jquery-1.7.2.js"></script>
+		<script src="/js/post.js"></script>
+		<script>
+			$(function() {
+				//判断是否登录
+				islogin(function(result) {
+					if(result != 1) {
+						alert("你还没有登录")
+						$(".comment-list").removeClass("canComment")
+						location.href='http://192.168.123.1:8888/login.html'
+						return ;
+					}
+					$(".comment-list").addClass("canComment")
+				})
+			})
+		</script>
+		<script src="/js/myComment.js"></script>
+	</head>
+
+	<body>
+
+		<!--最外层-->
+		<div class="webblog userComment">
+			<!--顶部菜单-->
+			<header class="webblog_top ">
+				<div class="container">
+
+					<div class="webName">
+						小美论坛
+					</div>
+					<div class="search">
+						<input type="text" name="" id="" value="" />
+						<a href="" class="icon icon-fangda"></a>
+					</div>
+					<div class="nav">
+						<div class="user" style="display: none;">
+							<span>
+                                        <a href="" id="personPage">
+                                            <i class="icon icon-person"></i>
+                                            <span id="username"></span>
+							</a>
+							<div class="commentPrompt">
+								<div class="comment-inner">
+
+								</div>
+								<a class="newCount">21</a>
+								<div class="iknow">
+									<button href="javascript:;">详情</button>
+									<button href="javascript:;">取消</button>
+								</div>
+							</div>
+
+							<a href="/user/logout" class="logout">退出</a>
+							</span>
+						</div>
+						<div class="login">
+							<a href="http://192.168.123.1:8888/login.html">登录</a>
+							<a href="http://192.168.123.1:8888/regist.html">注册</a>
+						</div>
+						<div class="homepage">
+							<a href="http://192.168.123.1:8888/homepage.html">
+								<i class="icon icon-home"></i> 首页
+							</a>
+						</div>
+					</div>
+
+				</div>
+				<div class="shadeBg">
+				
+			</div>
+				<div class="showNewComment">
+					<a href="javascript:;" id="closeShow"></a>
+					<div class="showNewComment-inner">
+						<div class="showNewComment-content comment-list">
+
+						</div>
+					</div>
+				</div>
+			
+			
+			</header>
+
+			<div class="webblog_main">
+				<div class="container">
+					<h2>我的评论~~</h2>
+					<div class="comment-list">
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+		
+		<div class="commentforPrompt">
+			<div class="form-group  input-group-lg ">
+				<div class="col-md-10">
+					<input type="text" name="commentforlast" class="form-control input-lg" id="commentforlast" value="" />
+				</div>
+				<div class="col-md-2">
+					<input type="button" value="提交" class="btn btn-success btn-lg" id="submitComment" />
+					<input type="button" value="取消" class="btn btn-default btn-lg" id="cancelComment" />
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>

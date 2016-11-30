@@ -1,0 +1,108 @@
+
+
+论坛功能：
+NodeJs+MongoDB+Angular+Jquery+Bootstrap
+功能：
+	注册登录
+	登录才能发帖
+	未登录也可以看帖子
+	分页
+	将帖子通过ajax加载到首页(显示说说的发表人，头像，说说内容，发表时间)
+	个人主页（显示个人所有帖子）
+	帖子搜索功能，某个人的搜索功能
+	帖子附带功能（删除，评论，帖子主页）
+
+	页面
+	首页，个人主页，说说详情页
+
+	发帖子
+	获取帖子---获取用户信息----写下帖子的用户
+
+	添加评论
+	提交评论到后台，后台通过用户名找到相应的信息，保存到comment的commenter中，
+
+	更新头像的话，不仅要更新用户表，还要更新帖子的信息
+
+提示评论数
+
+评论的时候提示帖子的主人
+（在首页增加一个框，显示提示的内容和提示哪一篇帖子）
+
+嵌套回复
+
+ 每个人一个嵌套回复，获得评论头，上一个回复
+
+ 后台也许只负责提供数据，不分类，前台进行分类
+ 后台只提供所有帖子的评论
+ 后台给每个评论都添加了用户跟头像了，这个不用怕。
+
+ hoho：我是评论头（authorid=x，postid=y，_id=z,commentHeaderId=_id,commentLastId）
+ ss 回复  hoh：xxxxxxx
+ （authorid=x，postid=y，commentHeaderId（回复的头部）,commentLastId（上一个评论id，可以找到他的用户名））
+
+ hoho 回复 ss：yyyyyyyy （）
+
+评论头作为一个独立模块，评论头相同，选出来
+三个评论
+hoho,ss-->hoho,hoho-->ss
+
+------保存所有第一次评论--------------------
+	var  arr=[];
+	comemnts.forEach(function(){
+		//没有上一个回复就是头部评论
+		if(!item.commentLastId){
+			arr.push(item)
+		}
+	})
+------保存所有头评论一样的评论,但是不包括第一个评论--------------------
+	var arr2=[];
+	arr.forEach(function(item,index){
+		var first=[];
+		comments.forEach(function(item2,index2){
+			if(item2.commentHeaderId==item._id){
+				first.push(item)
+			}
+		})
+		//这样就得到了所有头评论一样的东西
+		arr2.push(first)
+	})
+
+
+-----把所有头评论的子评论按时间排序，显示出来-------------
+
+	arr2.forEach(function(item,index){
+		arr2 是一个数组，里面的元素也是一个数组
+		然后一个个排序
+		item.sort(function(val1,val2){
+			val1=val1.commentDate;
+			val2=val2.comemntDate;
+			if(val1>val2){//时间迟
+				return 1；
+			}else if(val1<val2){
+				return -1;
+			}else{
+				return 0
+			}
+		})
+
+	})
+要写的健壮性一点，可能发表的时候没有登录，比如像一些必填的字段，就没有保存，
+必填的字段要检查，如果没有就提示失败
+
+-----------------新评论提示分类---------------------
+得到数据
+	新评论的帖子+新的评论
+	原先设计是把有新评论的帖子的评论都加载出来，很明显，这是不可能的，因为有的是就旧评论
+
+新评论分为文章的新评论和别人给你的回复
+	登录的时候找我所有的评论，保存所有的评论的id，
+	然后遍历看找到comment中comemntLastid等于_id的
+
+	文章的所有第一次评论，lastAuthor为文章主人
+	其他人自己评论自己，lastAuthor也为文章主人,
+	别人评论他，lastAuthorid是别人，只有别人收到回复
+
+
+难点：
+嵌套回复，迭代器，新评论
+bug：登录之后那个页面，就算掉线了，也能发表东西，然后保存不了用户id和文章id

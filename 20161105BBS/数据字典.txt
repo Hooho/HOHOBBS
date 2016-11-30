@@ -1,0 +1,106 @@
+用户表-------------------------
+    username:{String},//用户名字
+    password:{String},//用户密码
+    avatar:{String},//头像
+    role:{String},//角色身份
+    registDate:{Date}//注册时间
+
+评论表--------------------
+    authorId:{String},//关联的用户的id
+    postId:{String},//关联的帖子的id
+    commentContent:{String},
+    commentDate:{Date},
+    commentHeaderId:{String},//头回复，第一个次回复
+    commentLastId:{String}//回复的那个comment的id
+
+帖子表------------------------
+    authorId:{String},//关联的用户的id
+    postTitle:{String},//帖子标题
+    postContent:{String},//帖子内容
+    postDate:{Date},//发表日期,
+    hasnewComment:{Number,default:0}//是否有新评论
+
+返回评论----------------------------
+    _id
+    author
+    authorId
+    avatar
+    commentContent
+    commentDate:"2016-11-10T12:03:44.269Z"
+    commentHeaderId:"0"
+    commentLastId:"0"
+    postId
+    如果有父评论，就有父评论的名字
+
+返回帖子--------------------------------
+    _id
+    author
+    authorId
+    avatar
+    comment:Array[3]
+    commentcount:3
+    hasnewComment:15
+    postContent
+    postDate:"2016-11-10T11:27:06.497Z"
+    postTitle
+
+在后台接受到评论后进行父子评论分类------------------
+    var commentColletion=[]
+    //选出没有lastid的评论
+    result.comment.forEach(function(item,index){
+        if(item.commentLastId=="0"){
+            commentColletion.push({"parent":item,"child":[]});
+        }
+    })
+    //把子评论组合存进父评论
+    commentColletion.forEach(function(item1,index1){
+        var commentChild=[];
+        result.comment.forEach(function(item2,index2){
+            if(item2.commentHeaderId==item1.parent._id){
+                item1.child.push(item2)
+            }
+        })
+    })
+    //把评论根据时间排序
+    commentColletion.forEach(function(item,index){
+        item.child.sort(function(v1,v2){
+            v1=new Date(v1.commentDate);
+            v2=new Date(v2.commentDate);
+            if(v1>v2){
+                return 1;
+            }else if(v1<v2){
+                return -1;
+            }else{
+                return 0;
+            }
+        })
+    })
+-------------提示新评论数据
+
+
+_id
+authorAvatar
+authorId
+commentContent
+commentDate
+commentHeaderId
+commentLastId
+lastAuthorId
+newCom
+postAuthor
+postId
+postTitle
+postid
+
+
+
+
+
+
+
+
+
+
+
+
+

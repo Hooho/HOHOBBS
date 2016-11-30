@@ -1,0 +1,70 @@
+.home .text-box{
+	position: fixed;
+	width: 270px;
+}
+.home .text-box .avatar{
+	height: 110px;
+	width: 110px;
+	overflow: hidden;
+	border-radius: 100%;
+	margin:20px auto;
+	background-color: white
+}
+.post{
+	background-color: white;
+	border-radius: 5px;
+	padding: 10px;
+	margin-bottom: 10px;
+	color: black;
+}
+.post>h1{
+	font-size: 20px;
+	color: dodgerblue;
+	margin: 8px;
+}
+#form{
+	width: 100%;
+}
+
+#form textarea{
+	width: 100%;
+	resize: none;
+	height: 120px;
+	padding: 10px 20px;
+	border: 1px solid dodgerblue;
+	overflow: hidden;
+	margin-bottom: 5px;
+}
+#form textarea[name="postTitle"]{
+	height: 40px;
+	
+}
+#form  input[type="button"]{
+	width: 150px;
+	height: 40px;
+	border: none;color: white;
+	background:dodgerblue;
+	font-size: 20px;
+	float: right;font-weight: bold;
+}
+.manager{
+	height: 100px;
+	width: 270px;
+	background-color: #8192d6;
+	border-radius: 10px;
+	color: black;
+	position: fixed;
+	top: 300px;
+	display: none;
+}
+.manager>a{
+	display: block;
+	width: 50%;text-align: center;padding: 5px 0;
+	margin: 10px auto;
+	background-color: blue;
+	font-size: 16px;color: #ffffff;border-radius: 5px;
+	text-decoration: none;
+}
+.manager>a.on{
+	background-color: #28a4c9;
+}

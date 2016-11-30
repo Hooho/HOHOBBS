@@ -1,0 +1,7 @@
+*{margin: 0;padding: 0;}
+ul{list-style: none;}
+a{text-decoration: none;display: inline-block;}
+img{width: 100%;}
+body{font-family: "微软雅黑";font-size: 14px;color:black;
+	background-color: #83fcd8;
+	padding-bottom: 100px;}

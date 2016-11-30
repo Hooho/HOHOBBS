@@ -1,0 +1,37 @@
+.personPage_user{
+	height: 300px;
+	background-color: #ddf0ed;
+	margin-bottom: 10px;
+	text-align: center;
+	padding-top: 150px;
+}
+.personPage_user>div{
+	
+	margin-top: -90px;
+}
+.person_avatar{
+	height: 150px;
+	width: 150px;
+	overflow: hidden;
+	margin:  auto;
+	border-radius: 100%;
+}
+.person_name{
+	font-size: 40px;
+	color: black;
+	
+}
+.person .text-box{
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+	background-color: white;
+	box-shadow: 0 0 10px#ddf0ed;
+	text-align: center;
+}
+.setPersonData{
+	float: right;display: none;
+}
+#myComment{
+	display: none;
+}
